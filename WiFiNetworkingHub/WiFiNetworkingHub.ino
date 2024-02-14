@@ -11,15 +11,10 @@
 #include <HttpClient.h>
 #include <WiFiNINA.h>
 
-//char ssid[] = "GORMAN";
-//char pass[] = "Kaipothedogwashere1!";
 
 //Wifi SSID and password
-char ssid[] = "VM4425032";
-char pass[] = "ckp5rqynKdQv";
-
-//char ssid[] = "leah";
-//char pass[] = "123456789";
+char ssid[] = "";
+char pass[] = "";
 
 //Start WIFI
 int status = WL_IDLE_STATUS;
