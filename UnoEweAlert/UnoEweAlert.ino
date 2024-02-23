@@ -38,7 +38,8 @@ uint8_t prevOrientation = 0;
 int batteryPercent = 90;
 
 int temp = 20;
-
+//strap led
+#define strap_LED 8
 
 //Contraction sensor
 #include <ArduinoJson.h>
@@ -49,6 +50,7 @@ int temp = 20;
 //This is the pin where the cord is connected to
 #define RUBBERCORDPIN A0
 
+int value=0;
 int raw = 0;             // Raw input value
 int vin = 5;             // Store input voltage, this should be 5
 float vout = 0;          // Store output voltage
@@ -127,6 +129,9 @@ void setup() {
   pinMode(BLUE, OUTPUT);
   pinMode(GREEN, OUTPUT);
   pinMode(RED, OUTPUT);
+  pinMode(strap_LED, OUTPUT);
+
+  digitalWrite(BLUE, HIGH);
 }
 // packet counter, we increment per xmission
 int16_t packetnum = 0;
@@ -208,7 +213,7 @@ void loop() {
 
   //Check threshold
   if (Activity > 3) {
-    digitalWrite(BLUE, HIGH);
+    digitalWrite(strap_LED, HIGH);
   }
 
 
@@ -334,7 +339,7 @@ void loop() {
     Serial.println(time_between_cont / (1000));
 
     //calculate in terms of percentage with 10 minutes =0%, 1 min=99% and check is 2 char
-    int contraction_Val = ((time_between_cont / (1000)) / (60) * 100;
+    int contraction_Val = ((time_between_cont / (1000)) / (60) * 100);
     contraction_Val = 100 - contraction_Val;
     if (((time_between_cont / (1000)) < 99) && ((time_between_cont / (1000)) > 10)) {
       int contractionTime = (time_between_cont / (1000));
